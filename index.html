@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuwan Store - Panel & Script Bot WA</title>
+    <!-- Mengimpor Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Mengimpor Ikon Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #eaeaea;
+            --text-muted: #a0a0a0;
+            --success: #00b894;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(108, 92, 231, 0.1), transparent);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-main {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-main:hover {
+            background-color: #5a4ad1;
+            transform: translateY(-2px);
+        }
+
+        /* Section Produk */
+        .container {
+            padding: 2rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+        }
+
+        /* Filter Buttons */
+        .filters {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Grid Produk */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid #2d2d2d;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            width: fit-content;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .btn-order {
+            padding: 0.5rem 1rem;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-order:hover {
+            background-color: #1da851;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #2d2d2d;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Yuwan Store</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#product">Produk</a>
+            <a href="https://wa.me/6287719636597" target="_blank">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Selamat Datang di <span>Yuwan Store</span></h1>
+        <p>Menyediakan Panel Bot WA, Script Bot Premium, dan Jasa Instalasi dengan harga terjangkau dan garansi.</p>
+        <a href="#product" class="btn-main">Lihat Katalog</a>
+    </section>
+
+    <!-- Produk Section -->
+    <div class="container" id="product">
+        <h2 class="section-title">Katalog Produk</h2>
+
+        <!-- Filter Kategori -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">Semua</button>
+            <button class="filter-btn" onclick="filterProducts('panel')">Panel</button>
+            <button class="filter-btn" onclick="filterProducts('script')">Script</button>
+        </div>
+
+        <!-- Grid Produk -->
+        <div class="product-grid" id="productList">
+            
+            <!-- PRODUK 1: Panel Bot WA per GB -->
+            <div class="card" data-category="panel">
+                <span class="card-category">Panel</span>
+                <h3>Panel Bot WA per GB</h3>
+                <p>Panel Bot WA, garansi 10 hari.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 1.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*Panel%20Bot%20WA%20per%20GB*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 2: Reseller Panel WA -->
+            <div class="card" data-category="panel">
+                <span class="card-category">Panel</span>
+                <h3>Reseller Panel WA</h3>
+                <p>Paket reseller 1 bulan.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 8.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*Reseller%20Panel%20WA*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 3: Instal SC Bot WA -->
+            <div class="card" data-category="script">
+                <span class="card-category">Script</span>
+                <h3>Instal SC Bot WA</h3>
+                <p>Instal script bot WA.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 5.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*Instal%20SC%20Bot%20WA*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 4: SC Bot Jaga Grup -->
+            <div class="card" data-category="script">
+                <span class="card-category">Script</span>
+                <h3>SC Bot Jaga Grup</h3>
+                <p>Script bot untuk jaga grup WA.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 15.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*SC%20Bot%20Jaga%20Grup*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 5: SC Bot CPanel -->
+            <div class="card" data-category="script">
+                <span class="card-category">Script</span>
+                <h3>SC Bot CPanel</h3>
+                <p>Script bot dengan panel cPanel.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 10.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*SC%20Bot%20CPanel*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 6: SC Bot Cromewell -->
+            <div class="card" data-category="script">
+                <span class="card-category">Script</span>
+                <h3>SC Bot Cromewell</h3>
+                <p>Script bot Cromewell.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 13.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*SC%20Bot%20Cromewell*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUK 7: Rename SC Bot -->
+            <div class="card" data-category="script">
+                <span class="card-category">Script</span>
+                <h3>Rename SC Bot</h3>
+                <p>Fitur rename script bot WA.</p>
+                <div class="card-bottom">
+                    <span class="price">Rp 15.000</span>
+                    <a href="https://wa.me/6287719636597?text=Halo%20Yuwan%20Store,%20saya%20ingin%20pesan%20*Rename%20SC%20Bot*" class="btn-order" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Pesan
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Yuwan Store. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Fungsi Filter Produk
+        function filterProducts(category) {
+            const cards = document.querySelectorAll('.card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update status tombol aktif
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                // Logika untuk menandai tombol yang aktif
+                if (category === 'all' && btn.textContent.includes('Semua')) {
+                    btn.classList.add('active');
+                } else if (btn.textContent.toLowerCase().includes(category)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Tampilkan/Sembunyikan kartu
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
